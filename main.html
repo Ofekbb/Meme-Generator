@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="init()">
+    <header>
+        <section class="container header-wrapper flex align-center">
+            <div class="logo flex-1" onclick="openGallery()"> <img class="logo" src="icons\logobig.png"> </div>
+            <nav id="mainMenu">
+                <ul class="main-menu clean-list flex">
+                    <li>
+                        <a href="#" onclick="openGallery()" class="gallery active">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openAbout()" class="about ">About</a>
+                    </li>
+
+                </ul>
+                <button class="toggle-menu-btn fa" onclick="toggleMenu()" alt="Open main menu">+++</button>
+                <div class="toggle-menu-screen screen" onclick="toggleMenu()" alt="toggle main menu"></div>
+            </nav>
+        </section>
+    </header>
+
+    <div class="page1">
+        <div class="search-container">
+            <div class="search-by-typing">
+                <input type="text" data-trans="search-typing" placeholder="Enter search keyword" value="" onkeyup="onSearchBy(value)">
+            </div>
+            <div class="search-words"></div>
+        </div>
+        <div class="main-container">
+            <div class="gallery-container"></div>
+        </div>
+    </div>
+    <div class="page2 hidden">
+        <div class="canvas-container">
+            <canvas id="my-canvas" height="450" width="450"></canvas>
+            <div class="canvas-control">
+                <input type="text" class="control-txt-input" value="" onkeyup="onChangeText(value)" title="Change Text" data-trans="change-text">
+                <button class="control-change-txt" onclick="changeFocus()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                <button class="control-add-txt" onclick="addText()"><img src="icons/add.png"></button>
+                <button class="control-delete" onclick="deleteObject()"><img src="icons/trash.png"></button>
+                <button class="control-increase-txt" onclick="changeTextSize(0)"><img src="icons/increase font - icon.png"></button>
+                <button class="control-decrease-txt" onclick="changeTextSize(1)"><img src="icons/decrease font - icon.png"></button>
+                <button class="control-align-left" onclick="changeAlign(2)"><img src="icons/align-to-left.png"></button>
+                <button class="control-align-middle" onclick="changeAlign(1)"><img src="icons/center-text-alignment.png"></button>
+                <button class="control-align-right" onclick="changeAlign(0)"><img src="icons/align-to-right.png"></button>
+                <select class="control-font" onchange="changeFont(value)" title="Choose Font" data-trans="font">
+                    <option>Montserrat</option>
+                    <option>Arial</option>
+                    <option>Lucida Sans</option>
+                </select>
+                <button class="control-stroke-color"><input class="control-color-input" type="color"
+                    onchange="changeStrokeColor(value)" title="Choose stroke color" data-trans="stroke-color"/></button>
+                <button class="control-color"><input class="control-color-input" type="color"
+                    onchange="changeFillColor(value)" title="Choose color" data-trans="fill-color"/></button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="page3 hidden">
+        <div class="about-container">
+            <img class="about-pic" src="icons/me.jpg">
+            <div class="about-info">
+                <h1>Ofek Ben Baruch</h1>
+                <p>Hey! My name is Ofek Ben Baruch</p>
+                <p>Im study full stack develope in Coding Academy</p>
+                <div class="about-buttons">
+                    <button title="Linkedin"><img src="icons\linkedin-logo.png" /></button>
+                    <button title="GitHub"><img src="icons\github-logo.png" /></button>
+                    <button title="Facebook"><img src="icons\facebook-logo.png" /></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <img class="logo" src="icons\logo.png">
+    </footer>
+
+    <script src="./js/services/service.js"></script>
+    <script src="./js/services/canvas.service.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
