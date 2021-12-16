@@ -160,3 +160,28 @@ function getEvPos(ev) {
 
     return pos;
 }
+
+// STICKERS
+var gStickerPage = 1
+renderStickers()
+
+function renderStickers() {
+    // var stickers = getStickers()
+    var strHtml = '<button class="stickers-btn" onclick="onChangePage(false)"><img src="icons/left.png"></button><div class="stickers">'
+        // stickers.forEach(sticker => {
+        //     strHtml += `<img src="${sticker.url}" class="sticker" id="sticker-num-${sticker.id}" onclick="drawSticker(${sticker.id})">`
+        // })
+    strHtml += '</div><button class="stickers-btn" onclick="onChangePage(true)"><img src="icons/right.png"></button>'
+    document.querySelector('.sticker-container').innerHTML = strHtml
+        // onAddStickersInPage()
+}
+
+function onChangePage(bol) {
+    if (bol) {
+        (gStickerPage < 3) ? gStickerPage++ : gStickerPage
+    } else {
+        (gStickerPage > 0) ? gStickerPage-- : gStickerPage
+    }
+    console.log(gStickerPage)
+
+}

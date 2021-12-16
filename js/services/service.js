@@ -22,6 +22,14 @@ var gImgs = [
 
 ];
 
+var gStickers = [
+    { id: 1, url: 'stickers/beach-ball.png' },
+    { id: 2, url: 'stickers/coconut-drink.png' },
+    { id: 3, url: 'stickers/parrot.png' },
+    { id: 4, url: 'stickers/summer.png' },
+    { id: 5, url: 'stickers/sun.png' },
+    { id: 6, url: 'stickers/turtle.png' }
+]
 
 var gMeme = {
     selectedImgId: 5,
@@ -163,4 +171,8 @@ function moveSelectedByDragging(pos, gStartPos) {
 
 function getKeyWords() {
     return gKeywordSearchCountMap
+}
+
+function getStickers() {
+    return gStickers
 }

@@ -45,23 +45,31 @@
             <canvas id="my-canvas" height="450" width="450"></canvas>
             <div class="canvas-control">
                 <input type="text" class="control-txt-input" value="" onkeyup="onChangeText(value)" title="Change Text" data-trans="change-text">
-                <button class="control-change-txt" onclick="changeFocus()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                <button class="control-change-txt" onclick="changeFocus()"><img
+                        src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
                 <button class="control-add-txt" onclick="addText()"><img src="icons/add.png"></button>
                 <button class="control-delete" onclick="deleteObject()"><img src="icons/trash.png"></button>
-                <button class="control-increase-txt" onclick="changeTextSize(0)"><img src="icons/increase font - icon.png"></button>
-                <button class="control-decrease-txt" onclick="changeTextSize(1)"><img src="icons/decrease font - icon.png"></button>
+                <button class="control-increase-txt" onclick="changeTextSize(0)"><img
+                        src="icons/increase font - icon.png"></button>
+                <button class="control-decrease-txt" onclick="changeTextSize(1)"><img
+                        src="icons/decrease font - icon.png"></button>
                 <button class="control-align-left" onclick="changeAlign(2)"><img src="icons/align-to-left.png"></button>
-                <button class="control-align-middle" onclick="changeAlign(1)"><img src="icons/center-text-alignment.png"></button>
-                <button class="control-align-right" onclick="changeAlign(0)"><img src="icons/align-to-right.png"></button>
+                <button class="control-align-middle" onclick="changeAlign(1)"><img
+                        src="icons/center-text-alignment.png"></button>
+                <button class="control-align-right" onclick="changeAlign(0)"><img
+                        src="icons/align-to-right.png"></button>
                 <select class="control-font" onchange="changeFont(value)" title="Choose Font" data-trans="font">
                     <option>Montserrat</option>
                     <option>Arial</option>
                     <option>Lucida Sans</option>
                 </select>
                 <button class="control-stroke-color"><input class="control-color-input" type="color"
-                    onchange="changeStrokeColor(value)" title="Choose stroke color" data-trans="stroke-color"/></button>
+                        onchange="changeStrokeColor(value)" title="Choose stroke color" data-trans="stroke-color"
+                        style="border:none" /></button>
                 <button class="control-color"><input class="control-color-input" type="color"
-                    onchange="changeFillColor(value)" title="Choose color" data-trans="fill-color"/></button>
+                        onchange="changeFillColor(value)" title="Choose color" data-trans="fill-color"
+                        style="border:none" /></button>
+                <div class="sticker-container"></div>
 
             </div>
         </div>
