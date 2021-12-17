@@ -61,6 +61,7 @@ html {
 }
 
 body {
+    min-height: 100%;
     margin: 0;
 }
 
@@ -109,10 +110,22 @@ footer img {
     text-align: center;
 }
 
+.search-container img {
+    position: relative;
+    top: 5px;
+    right: 35px;
+}
 
-/* .search-words {
-    flex-direction: row;
-} */
+.search-by-typing input {
+    width: 260px;
+    height: 30px;
+    border: none;
+    border: 2px solid #040a2c;
+    text-align: center;
+    color: #000000;
+    font-size: 0.9rem;
+    border-radius: 12px;
+}
 
 .search-button {
     border: none;
@@ -137,6 +150,16 @@ footer img {
     /* align-self: center; */
     cursor: pointer;
     width: 240px;
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .4s ease;
+    backface-visibility: hidden;
+}
+
+.gallery-container img:hover {
+    opacity: 0.6;
 }
 
 
@@ -158,9 +181,9 @@ footer img {
 .canvas-control {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-gap: 10px;
-    grid-template-areas: "txt txt txt txt txt" ". change add-txt delete ." "increase decrease align-left align-middle align-right" "font font font bold color" "gif gif gif gif gif" "gif gif gif gif gif";
+    grid-template-areas: "txt txt txt txt txt" ". change add-txt delete ." "increase decrease align-left align-middle align-right" "font font font bold color" "gif gif gif gif gif" "gif gif gif gif gif" "share share . download download";
 }
 
 .canvas-control button {
@@ -234,7 +257,36 @@ footer img {
     border: none;
     border-radius: 12px;
     background-color: #ffffff;
+}
+
+.sticker {
+    height: 100px;
+    width: 100px;
+    padding: 5px;
     cursor: pointer;
+}
+
+.control-share {
+    grid-area: share;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background-color: #ff7f00;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.control-download {
+    grid-area: download;
+    display: flex;
+    user-select: none;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background-color: #ff7f00;
+    color: #ffffff;
 }
 
 
@@ -390,5 +442,12 @@ header .logo {
         flex-direction: column;
         align-items: center;
         padding-bottom: 20px;
+    }
+    .sticker-container {
+        flex-direction: column;
+    }
+    .search-container img {
+        left: 100px;
+        top: -25px;
     }
 }

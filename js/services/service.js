@@ -1,3 +1,5 @@
+'use strict'
+
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2, 'politics': 4, 'sport': 5 }
 var gIdx = 2
 var gImgs = [
@@ -22,43 +24,156 @@ var gImgs = [
 
 ];
 
-var gStickers = [
-    { id: 1, url: 'stickers/beach-ball.png' },
-    { id: 2, url: 'stickers/coconut-drink.png' },
-    { id: 3, url: 'stickers/parrot.png' },
-    { id: 4, url: 'stickers/summer.png' },
-    { id: 5, url: 'stickers/sun.png' },
-    { id: 6, url: 'stickers/turtle.png' }
+var gStickers = [{
+        id: 1,
+        url: 'stickers/beach-ball.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 2,
+        url: 'stickers/coconut-drink.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 3,
+        url: 'stickers/parrot.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 4,
+        url: 'stickers/summer.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 5,
+        url: 'stickers/sun.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 6,
+        url: 'stickers/turtle.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 7,
+        url: 'stickers/party.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 8,
+        url: 'stickers/glass.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    },
+    {
+        id: 9,
+        url: 'stickers/party-hat.png',
+        positionX: 225,
+        positionY: 225,
+        width: 100,
+        height: 100,
+        isDragging: false
+    }
 ]
-
 var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
+    selectedStickerIdx: 0,
     lines: [{
             idx: 0,
             txt: 'I Love Falafel',
-            size: 30,
+            size: 40,
             font: 'Montserrat',
             align: 'center',
             color: 'black',
             strokeColor: 'white',
             positionX: 250,
             positionY: 50,
+            isDragging: false
 
         },
         {
             idx: 1,
             txt: 'Yofi',
-            size: 30,
+            size: 40,
             font: 'Montserrat',
             align: 'center',
             color: 'black',
             strokeColor: 'white',
             positionX: 250,
             positionY: 400,
+            isDragging: false
 
         }
-    ]
+    ],
+    stickers: []
+}
+
+function clearCanvas() {
+    gMeme = {
+        selectedImgId: 5,
+        selectedLineIdx: 0,
+        selectedStickerIdx: 0,
+        lines: [{
+                idx: 0,
+                txt: 'I Love Falafel',
+                size: 40,
+                font: 'Montserrat',
+                align: 'center',
+                color: 'black',
+                strokeColor: 'white',
+                positionX: 250,
+                positionY: 50,
+                isDragging: false
+
+            },
+            {
+                idx: 1,
+                txt: 'Yofi',
+                size: 40,
+                font: 'Montserrat',
+                align: 'center',
+                color: 'black',
+                strokeColor: 'white',
+                positionX: 250,
+                positionY: 400,
+                isDragging: false
+
+            }
+        ],
+        stickers: []
+    }
 }
 
 function getImgs() {
@@ -87,31 +202,61 @@ function addLine() {
         idx: gIdx++,
         txt: 'Add new text here',
         font: 'Montserrat',
-        size: 30,
+        size: 40,
         align: 'center',
         color: 'black',
         strokeColor: 'white',
         positionX: 225,
-        positionY: 225
+        positionY: 225,
+        isDragging: false
     }
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
 function deleteObjectService() {
+    if (gFocusOnTxt) {
+        if (gMeme.lines.length === 0) return
+        gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+        gMeme.selectedLineIdx = 0
+    }
+    if (gFocusOnSticker) {
+        if (gMeme.stickers.length === 0) return
+        var idx = getSelectedStickerIdx()
+        console.log(gMeme.selectedStickerIdx)
+        gMeme.stickers.splice(idx, 1)
+    }
+}
+
+function changeLines() {
     if (gMeme.lines.length === 0) return
-    gMeme.lines.splice(gFocus, 1)
+    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
+
 }
 
 
 // 0 for increase
 // 1 for decrease
 function changeTextSizeService(num) {
-    if (num === 0) {
-        gMeme.lines[gFocus].size++
-    } else {
-        if (gMeme.lines[gFocus].size > 0) {
-            gMeme.lines[gFocus].size--
+
+    if (gFocusOnTxt) {
+        if (num === 0) {
+            gMeme.lines[gMeme.selectedLineIdx].size++
+        } else {
+            if (gMeme.lines[gMeme.selectedLineIdx].size > 0) {
+                gMeme.lines[gMeme.selectedLineIdx].size--
+            }
+        }
+    }
+    if (gFocusOnSticker) {
+        var idx = getSelectedStickerIdx()
+        if (num === 0) {
+            gMeme.stickers[idx].width += 5
+            gMeme.stickers[idx].height += 5
+        } else {
+            gMeme.stickers[idx].width -= 5
+            gMeme.stickers[idx].height -= 5
         }
     }
 }
@@ -122,32 +267,35 @@ function changeTextSizeService(num) {
 // 2 for Right
 
 function changeAlignService(num) {
+    if (gFocusOnSticker) return
     switch (num) {
         case 0:
-            gMeme.lines[gFocus].align = 'left'
+            gMeme.lines[gMeme.selectedLineIdx].align = 'left'
             break;
         case 1:
-            gMeme.lines[gFocus].align = 'center'
+            gMeme.lines[gMeme.selectedLineIdx].align = 'center'
             break;
         case 2:
-            gMeme.lines[gFocus].align = 'right'
+            gMeme.lines[gMeme.selectedLineIdx].align = 'right'
     }
 }
 
 function changeFontService(font) {
-    gMeme.lines[gFocus].font = font
+    if (gFocusOnSticker) return
+    gMeme.lines[gMeme.selectedLineIdx].font = font
 }
 
 function changeStrokeColorService(strokeColor) {
-    gMeme.lines[gFocus].strokeColor = strokeColor
+    if (gFocusOnSticker) return
+    gMeme.lines[gMeme.selectedLineIdx].strokeColor = strokeColor
 }
 
 function changeFillColorService(fillColor) {
-    gMeme.lines[gFocus].color = fillColor
+    if (gFocusOnSticker) return
+    gMeme.lines[gMeme.selectedLineIdx].color = fillColor
 }
 
 
-//render line IDX
 function renderIdx() {
     const length = gMeme.lines.length
     var idx = 0
@@ -155,19 +303,55 @@ function renderIdx() {
         line.idx = idx
         idx++
     })
-    console.log(gMeme)
 }
 
-function moveSelectedByDragging(pos, gStartPos) {
-    const dx = pos.x - gStartPos.x;
-    const dy = pos.y - gStartPos.y;
+function getSelectedStickerIdx() {
+    var idx = gMeme.stickers.findIndex(function(sticker) {
+        return (sticker.id === gMeme.selectedStickerIdx)
+    })
+    return idx
+}
 
-    if (gFocus >= 0) {
-        gMeme.lines[gFocus].positionX += dx;
-        gMeme.lines[gFocus].positionY += dy;
+function changeSelectedLine(idx) {
+    gMeme.selectedLineIdx = idx
+}
+
+function changeSelectedSticker(idx) {
+    gMeme.selectedStickerIdx = idx
+}
+
+function updateIsDragging(idx, type, isDragging) {
+    if (type === 'lines') {
+        gMeme.lines[idx].isDragging = isDragging
+    }
+    if (type === 'stickers') {
+        var sticker = gMeme.stickers.find(function(sticker) {
+            return (sticker.id === idx)
+        })
+        sticker.isDragging = isDragging;
     }
 
 }
+
+
+function changePosition(dx, dy) {
+    if (gFocusOnTxt) {
+        if (gMeme.lines.length === 0) return
+        const lineIdx = gMeme.selectedLineIdx
+        gMeme.lines[lineIdx].positionX += dx
+        gMeme.lines[lineIdx].positionY += dy
+    }
+    if (gFocusOnSticker) {
+        if (gMeme.stickers.length === 0) return
+        var memeSticker = gMeme.stickers.find(function(sticker) {
+            return (sticker.id === gMeme.selectedStickerIdx)
+        })
+        memeSticker.positionX += dx
+        memeSticker.positionY += dy
+
+    }
+}
+
 
 function getKeyWords() {
     return gKeywordSearchCountMap
@@ -175,4 +359,8 @@ function getKeyWords() {
 
 function getStickers() {
     return gStickers
+}
+
+function addStickerToMeme(sticker) {
+    gMeme.stickers.push(sticker)
 }

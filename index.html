@@ -23,7 +23,7 @@
                     </li>
 
                 </ul>
-                <button class="toggle-menu-btn fa" onclick="toggleMenu()" alt="Open main menu">+++</button>
+                <button class="toggle-menu-btn fa" onclick="toggleMenu()" alt="Open main menu">☰</button>
                 <div class="toggle-menu-screen screen" onclick="toggleMenu()" alt="toggle main menu"></div>
             </nav>
         </section>
@@ -33,6 +33,7 @@
         <div class="search-container">
             <div class="search-by-typing">
                 <input type="text" data-trans="search-typing" placeholder="Enter search keyword" value="" onkeyup="onSearchBy(value)">
+                <img src="icons/search-icon.png">
             </div>
             <div class="search-words"></div>
         </div>
@@ -45,7 +46,7 @@
             <canvas id="my-canvas" height="450" width="450"></canvas>
             <div class="canvas-control">
                 <input type="text" class="control-txt-input" value="" onkeyup="onChangeText(value)" title="Change Text" data-trans="change-text">
-                <button class="control-change-txt" onclick="changeFocus()"><img
+                <button class="control-change-txt" onclick="onChangeLines()"><img
                         src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
                 <button class="control-add-txt" onclick="addText()"><img src="icons/add.png"></button>
                 <button class="control-delete" onclick="deleteObject()"><img src="icons/trash.png"></button>
@@ -70,6 +71,9 @@
                         onchange="changeFillColor(value)" title="Choose color" data-trans="fill-color"
                         style="border:none" /></button>
                 <div class="sticker-container"></div>
+                <div class="control-share" onclick="uploadImg()">Share Meme!</div>
+                <a href="#" class="control-download" onclick="downloadCanvas(this)" download="my-meme.jpg"> Download Meme!</a>
+                <div class="share-container"></div>
 
             </div>
         </div>
@@ -97,6 +101,7 @@
         <img class="logo" src="icons/logo.png">
     </footer>
 
+    <script src="js/services/upload.service.js"></script>
     <script src="js/services/service.js"></script>
     <script src="js/services/canvas.service.js"></script>
     <script src="js/main.js"></script>

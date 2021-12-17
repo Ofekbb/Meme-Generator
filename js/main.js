@@ -1,16 +1,13 @@
 'use strict'
 
-var gFocus
 
 function init() {
     openGallery()
-    gFocus = 0
     searchKeyWordRender()
 }
 
 function renderGallery() {
     var imgs = getImgs()
-    console.log(imgs)
     var strHtml = ''
     imgs.forEach(img => {
         strHtml += `<img src="${img.url}" id="img-num-${img.id}" onclick="onRenderCanvas(${img.id})">`
@@ -20,6 +17,7 @@ function renderGallery() {
 
 function openGallery() {
     renderGallery()
+    clearCanvas()
     document.querySelector('.page1').classList.remove('hidden')
     document.querySelector('.page2').classList.add('hidden')
     document.querySelector('.page3').classList.add('hidden')
@@ -36,7 +34,7 @@ function toggleMenu() {
 
 function onChangeText(value) {
     if (gMeme.lines.length === 0) return
-    updateMemeTxt(gFocus, value) //update service
+    updateMemeTxt(gMeme.selectedLineIdx, value) //update service
     renderCanvas()
 }
 
